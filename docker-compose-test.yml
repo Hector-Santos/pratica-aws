@@ -1,0 +1,19 @@
+services:
+  postgres_sorteador_db:
+    image: postgres
+    container_name: postgres_sorteador_db
+    restart: always
+    ports:
+      - 4457:5432
+    env_file:
+      - .env.test
+
+  node_sorteador_app:
+    container_name: node_sorteador_app
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres_sorteador_db
+    env_file:
+      - .env.test
